@@ -131,11 +131,17 @@ ollama pull llama3
 
 ### Opção 1: Dashboard Web (Streamlit)
 
+1- Abrir o powershell
+2- Entre na pasta do projeto (ex cd .\github\Projeto-Integrador-IV\)
+2- Rode o seguinte comando:
+
 ```bash
 python3 -m streamlit run dashboard.py
 ```
 
 O dashboard estará disponível em: [http://localhost:8501](http://localhost:8501)
+
+Para fechar o console, utilize crtl+c.
 
 ### Opção 2: Versão Console
 

@@ -6,7 +6,14 @@ from scripts.llm_insights import gerar_insights
 
 # --- CONFIGURAÇÃO BÁSICA ---
 st.set_page_config(page_title="Dashboard da Empresa EDS Climatizações", layout="wide")
-st.title("📊 Dashboard Financeiro - EDS Climatizações")
+#--- LOGO E NOME DA EMPRESA ---
+from PIL import Image
+logo = Image.open("logo.png")  # Certifique-se de que o arquivo está na mesma pasta que o dashboard.py
+col_logo, col_titulo = st.columns([1, 5])
+with col_logo:
+    st.image(logo, width=120)
+with col_titulo:
+    st.title(" Dashboard Financeiro e Operacional - EDS Climatizações")
 
 # --- CONEXÃO COM BANCO ---
 conn = conectar_db("db/empresa_arcondicionado.sqlite")
