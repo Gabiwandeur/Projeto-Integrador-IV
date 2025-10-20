@@ -5,8 +5,8 @@ from scripts.analise import resumo_financeiro, resumo_operacional
 from scripts.llm_insights import gerar_insights
 
 # --- CONFIGURAÇÃO BÁSICA ---
-st.set_page_config(page_title="Dashboard da Empresa de Ar-Condicionado", layout="wide")
-st.title("📊 Dashboard Financeiro e Operacional")
+st.set_page_config(page_title="Dashboard da Empresa EDS Climatizações", layout="wide")
+st.title("📊 Dashboard Financeiro - EDS Climatizações")
 
 # --- CONEXÃO COM BANCO ---
 conn = conectar_db("db/empresa_arcondicionado.sqlite")
@@ -35,7 +35,7 @@ if resumo["receita_por_mes"] and resumo["despesa_por_mes"]:
         "Receita": resumo["receita_por_mes"],
         "Despesa": resumo["despesa_por_mes"]
     }).fillna(0)
-    st.subheader("📆 Receita vs Despesa por Mês")
+    st.subheader("📆 Receita vs Despesa")
     st.line_chart(df_mes)
 else:
     st.info("Sem dados mensais suficientes para exibir gráficos.")
@@ -54,7 +54,7 @@ if resumo["ultima_manutencao"]:
 st.divider()
 
 # --- INSIGHTS COM IA ---
-st.subheader("🤖 Geração de Insights Automáticos")
+st.subheader("🤖 Geração de Insights com IA")
 if st.button("Gerar insights com LLM"):
     with st.spinner("Analisando dados com IA..."):
         insights = gerar_insights(resumo)

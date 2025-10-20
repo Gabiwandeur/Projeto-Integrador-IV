@@ -45,7 +45,7 @@ venv\Scripts\activate
 5. **Instale as dependências**
 
 ```cmd
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Linux (Ubuntu/Debian)
@@ -74,21 +74,12 @@ source venv/bin/activate
 4. **Instale as dependências**
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ---
 
-## 📦 Dependências
 
-Crie um arquivo `requirements.txt` com o seguinte conteúdo:
-
-```
-streamlit==1.28.0
-pandas==2.1.0
-ollama==0.1.7
-sqlite3
-```
 
 ---
 
@@ -141,7 +132,7 @@ ollama pull llama3
 ### Opção 1: Dashboard Web (Streamlit)
 
 ```bash
-streamlit run dashboard.py
+python3 -m streamlit run dashboard.py
 ```
 
 O dashboard estará disponível em: [http://localhost:8501](http://localhost:8501)
@@ -172,28 +163,6 @@ dashboard-ar-condicionado/
 
 ---
 
-## 🐛 Solução de Problemas
-
-**Erro de Módulo Não Encontrado**
-
-```bash
-# No Linux, use python3 explicitamente
-python3 -m streamlit run dashboard.py
-```
-
-**Ollama Não Encontrado**
-
-* Certifique-se de que o Ollama está rodando como serviço
-* **Windows:** Verifique nos serviços do sistema
-* **Linux:** `sudo systemctl status ollama`
-
-**Problemas com o Banco de Dados**
-
-* Verifique se o arquivo do banco existe no caminho correto
-* Confirme que as tabelas necessárias estão presentes
-
----
-
 ## 📊 Funcionalidades
 
 * ✅ Dashboard financeiro com métricas principais
@@ -202,18 +171,6 @@ python3 -m streamlit run dashboard.py
 * ✅ Insights automáticos com IA (LLM)
 * ✅ Interface web responsiva
 * ✅ Versão console para uso em terminal
-
----
-
-## 👨‍💻 Desenvolvimento
-
-Para contribuir com o projeto:
-
-1. Faça um fork do repositório
-2. Crie uma branch para sua feature
-3. Commit suas mudanças
-4. Push para a branch
-5. Abra um Pull Request
 
 ---
 
