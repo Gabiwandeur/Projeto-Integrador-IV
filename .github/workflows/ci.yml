@@ -1,0 +1,35 @@
+name: CI - Checkout and Archive
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  checkout-and-archive:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Create ZIP archive
+      run: |
+        zip -r repository-backup.zip . -x "*.git*" "*.github*"
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: repository-backup
+        path: repository-backup.zip
+        retention-days: 30
+        
+    - name: Display workflow summary
+      run: |
+        echo "✅ Repository checked out successfully"
+        echo "📦 Artifact created: repository-backup.zip"
+        echo "📁 Contents included: all repository files (excluding .git and .github)"
