@@ -37,15 +37,64 @@ col4.metric("🎟️ Ticket Médio", f"R$ {resumo['ticket_medio']:.2f}")
 st.divider()
 
 # --- GRÁFICOS FINANCEIROS ---
-if resumo["receita_por_mes"] and resumo["despesa_por_mes"]:
-    df_mes = pd.DataFrame({
-        "Receita": resumo["receita_por_mes"],
-        "Despesa": resumo["despesa_por_mes"]
-    }).fillna(0)
+if not df_financeiro.empty:
+    df_financeiro["data"] = pd.to_datetime(df_financeiro["data"])
+    df_financeiro["tipo"] = df_financeiro["tipo"].str.strip().str.capitalize()
+
+    # Extrai número e nome do mês
+    df_financeiro["mes_num"] = df_financeiro["data"].dt.month
+    df_financeiro["mes_nome"] = df_financeiro["data"].dt.strftime("%b")
+    
+    # Ordem correta dos meses
+    meses_ordem = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", 
+                   "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+    
+    # Agrupa por número do mês e tipo
+    df_mes = (
+        df_financeiro.groupby(["mes_num", "tipo"])["valor"]
+        .sum()
+        .unstack(fill_value=0)
+        .rename(columns={"Receita": "Receita", "Despesa": "Despesa"})
+        .sort_index()
+    )
+    
+    # Adiciona coluna com nome do mês
+    df_mes["Mês"] = [meses_ordem[i - 1] for i in df_mes.index]
+    
+    # Converte a coluna "Mês" para categoria com ordem correta
+    df_mes["Mês"] = pd.Categorical(df_mes["Mês"], categories=meses_ordem, ordered=True)
+    
+    # Ordena pelo mês corretamente
+    df_mes = df_mes.sort_values("Mês")
+    
+    # Formata os valores monetários com R$
+    for coluna in df_mes.columns:
+        if coluna in ["Receita", "Despesa"]:
+            df_mes[coluna] = df_mes[coluna].apply(lambda x: f"R$ {x:,.2f}" if pd.notnull(x) else "R$ 0,00")
+    
+    # Define Mês como índice
+    df_mes = df_mes.set_index("Mês")
+
     st.subheader("📆 Receita vs Despesa")
-    st.line_chart(df_mes)
+    
+    # Prepara dados para o gráfico (sem formatação R$ para o gráfico)
+    df_grafico = (
+        df_financeiro.groupby(["mes_num", "tipo"])["valor"]
+        .sum()
+        .unstack(fill_value=0)
+        .rename(columns={"Receita": "Receita", "Despesa": "Despesa"})
+        .sort_index()
+    )
+    df_grafico["Mês"] = [meses_ordem[i - 1] for i in df_grafico.index]
+    df_grafico["Mês"] = pd.Categorical(df_grafico["Mês"], categories=meses_ordem, ordered=True)
+    df_grafico = df_grafico.sort_values("Mês").set_index("Mês")
+    
+    # Exibe tabela formatada e gráfico (CORREÇÃO APLICADA AQUI)
+    st.dataframe(df_mes, width='stretch')
+    st.line_chart(df_grafico)
 else:
-    st.info("Sem dados mensais suficientes para exibir gráficos.")
+    st.info("Sem dados financeiros suficientes para exibir gráficos.")
+
 
 st.divider()
 

@@ -30,9 +30,68 @@ def gerar_insights(resumo: dict) -> str:
     5. 📅 Projeções para os próximos 3 meses.
 
     Estruture a resposta com subtítulos e marcadores para facilitar a leitura.
+
+    IMPORTANTE: Use apenas caracteres simples do português, sem caracteres especiais complexos.
     """
     response = ollama.chat(
         model="llama3",
         messages=[{"role": "user", "content": prompt}]
     )
-    return response["message"]["content"]
+    
+    texto_insights = response["message"]["content"]
+    
+    # CORREÇÃO SIMPLES: Remover todas as quebras de linha problemáticas
+    # Primeiro, dividir o texto em linhas
+    lines = texto_insights.split('\n')
+    cleaned_lines = []
+    
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        
+        # Se a linha tem apenas 1 caractere e a próxima linha também tem poucos caracteres,
+        # provavelmente é uma palavra quebrada
+        if (len(line) <= 2 and i + 1 < len(lines) and 
+            len(lines[i + 1].strip()) <= 2 and
+            not line.startswith('#') and  # Não é título
+            not line.startswith('*') and  # Não é marcador
+            not line.startswith('-') and  # Não é item de lista
+            not line == ''):  # Não é linha vazia
+            
+            # Juntar as linhas quebradas
+            combined = line
+            j = i + 1
+            while j < len(lines) and len(lines[j].strip()) <= 2:
+                combined += lines[j].strip()
+                j += 1
+            
+            cleaned_lines.append(combined)
+            i = j
+        else:
+            cleaned_lines.append(line)
+            i += 1
+    
+    # Reconstruir o texto
+    texto_insights = '\n'.join(cleaned_lines)
+    
+    # Substituições diretas para caracteres problemáticos
+    substituicoes = {
+        'é': 'é',
+        'á': 'á',
+        'í': 'í', 
+        'ó': 'ó',
+        'ú': 'ú',
+        'ã': 'ã',
+        'õ': 'õ',
+        'ç': 'ç',
+        'eˊ': 'é',
+        'meˊ': 'mé',
+        'teˊ': 'té',
+        'deˊ': 'dé',
+        'ı́': 'í'
+    }
+    
+    for problema, correcao in substituicoes.items():
+        texto_insights = texto_insights.replace(problema, correcao)
+    
+    return texto_insights
