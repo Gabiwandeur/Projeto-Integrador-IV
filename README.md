@@ -122,7 +122,7 @@ curl -fsSL https://ollama.ai/install.sh | sh
 ### Download do Modelo LLM
 
 ```bash
-ollama pull llama3
+ollama pull llama3.2
 ```
 
 ---
