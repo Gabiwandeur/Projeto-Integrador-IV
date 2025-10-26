@@ -6,7 +6,7 @@ Este projeto é um **dashboard interativo** para análise financeira e operacion
 
 ## 📋 Pré-requisitos
 
-* Python 3.10.11
+* Python 3.10
 * Git
 * 4GB de RAM disponível (mínimo recomendado)
 
@@ -14,38 +14,31 @@ Este projeto é um **dashboard interativo** para análise financeira e operacion
 
 ## 🛠️ Instalação
 
-### Windows
+### Windows com WSL
 
-1. **Instale o Python**
+1. **Instale o WSL com Ubuntu**
 
-   * Acesse [python.org](https://www.python.org/)
-   * Baixe a versão mais recente do Python
-   * Durante a instalação, **marque a opção "Add Python to PATH"**
+O WSL estará disponível em: [http://localhost:8501](http://localhost:8501)
 
-2. **Instale o Git**
-
-   * Acesse [git-scm.com](https://git-scm.com/)
-   * Baixe e instale o Git for Windows
-   * Use as configurações padrão durante a instalação
-
-3. **Clone o repositório**
+2. **Clone o repositório**
 
 ```cmd
 git clone https://github.com/seu-usuario/dashboard-ar-condicionado.git
 cd dashboard-ar-condicionado
 ```
 
-4. **Crie um ambiente virtual (recomendado)**
+3. **Crie um ambiente virtual (recomendado)**
 
 ```cmd
-python -m venv venv
-venv\Scripts\activate
+python3.10 -m venv venv
+source venv/bin/activate
 ```
 
-5. **Instale as dependências**
+4. **Instale as dependências**
 
 ```cmd
-pip3 install -r requirements.txt
+cd /mnt/c/Users/gabiw/github/Projeto-Integrador-IV
+pip install -r requirements.txt
 ```
 
 ### Linux (Ubuntu/Debian)
@@ -67,14 +60,14 @@ cd dashboard-ar-condicionado
 3. **Crie um ambiente virtual**
 
 ```bash
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate
 ```
 
 4. **Instale as dependências**
 
 ```bash
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
@@ -107,14 +100,6 @@ db/empresa_arcondicionado.sqlite
 
 ## 🤖 Configuração do Ollama (para Insights com IA)
 
-### Instalação do Ollama
-
-* **Windows:**
-  Baixe do site [ollama.ai](https://ollama.ai/) e execute o instalador.
-  O Ollama será instalado como serviço.
-
-* **Linux:**
-
 ```bash
 curl -fsSL https://ollama.ai/install.sh | sh
 ```
@@ -136,18 +121,12 @@ ollama pull llama3.2
 2- Rode o seguinte comando:
 
 ```bash
-python3 -m streamlit run dashboard.py
+python -m streamlit run dashboard.py
 ```
 
 O dashboard estará disponível em: [http://localhost:8501](http://localhost:8501)
 
 Para fechar o console, utilize crtl+c.
-
-### Opção 2: Versão Console
-
-```bash
-python main.py
-```
 
 ---
 
