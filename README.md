@@ -18,7 +18,7 @@ Este projeto é um **dashboard interativo** para análise financeira e operacion
 
 1. **Instale o WSL com Ubuntu**
 
-O WSL estará disponível em: [http://localhost:8501](http://localhost:8501)
+* [Guia de Instalacao do WSL no Windows 11](https://learn.microsoft.com/pt-br/windows/wsl/install)
 
 2. **Clone o repositório**
 
@@ -69,10 +69,6 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-
----
-
-
 
 ---
 
