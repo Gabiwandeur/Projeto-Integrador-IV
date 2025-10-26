@@ -90,7 +90,7 @@ if not df_financeiro.empty:
     df_grafico = df_grafico.sort_values("Mês").set_index("Mês")
     
     # Exibe tabela formatada e gráfico (CORREÇÃO APLICADA AQUI)
-    st.dataframe(df_mes, use_container_width=True)
+    st.dataframe(df_mes, width='stretch')
     st.line_chart(df_grafico)
 else:
     st.info("Sem dados financeiros suficientes para exibir gráficos.")
