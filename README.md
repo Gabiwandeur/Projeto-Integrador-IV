@@ -6,7 +6,7 @@ Este projeto é um **dashboard interativo** para análise financeira e operacion
 
 ## 📋 Pré-requisitos
 
-* Python 3.8 ou superior
+* Python 3.10.11
 * Git
 * 4GB de RAM disponível (mínimo recomendado)
 
