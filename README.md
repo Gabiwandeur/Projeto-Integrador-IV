@@ -113,9 +113,11 @@ ollama pull llama3.2
 ### Opção 1: Dashboard Web (Streamlit)
 
 1- Abrir o WSL ubuntu
-2- Ative o ambiente virtual : python3.10 -m venv venv
-source venv/bin/activate
-3- Entre na pasta do projeto (ex: cd /mnt/c/Users/gabiw/github/Projeto-Integrador-IV)
+
+2- Entre na pasta do projeto (ex: cd /mnt/c/Users/gabiw/github/Projeto-Integrador-IV)
+
+3- Ative o ambiente virtual : python3.10 -m venv venv source venv/bin/activate
+
 4- Rode o seguinte comando:
 
 ```bash
